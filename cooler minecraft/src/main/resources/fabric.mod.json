@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"mersif.cooler.ExampleMod"
+			"mersif.cooler.SampleItem"
 		],
 		"fabric-datagen": [
 			"mersif.cooler.ExampleModDataGenerator"

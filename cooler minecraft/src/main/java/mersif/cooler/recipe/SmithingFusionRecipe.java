@@ -15,16 +15,14 @@ public class SmithingFusionRecipe implements SmithingRecipe {
     public final Ingredient base;
     public final Ingredient addition;
     public final ItemStack result;
-    public final Ingredient template;
 
-    public SmithingFusionRecipe(Ingredient base, Ingredient addition, Ingredient template, ItemStack result) {
+    public SmithingFusionRecipe(Ingredient base, Ingredient addition, ItemStack result) {
         this.base = base;
         this.addition = addition;
         this.result = result;
-        this.template = Ingredient.ofItems(null);
     }
 
-
+    // could delete this ngl but keep it for now. gonna remove if truly has no purpose
 
     @Override
     public boolean testBase(ItemStack stack) {
@@ -63,8 +61,9 @@ public class SmithingFusionRecipe implements SmithingRecipe {
 
     @Override
     public boolean testTemplate(ItemStack stack) {
-        return this.template.test(stack);
+        return false;
     }
+
 
     @Override
     public RecipeSerializer<?> getSerializer() {
@@ -91,7 +90,7 @@ public class SmithingFusionRecipe implements SmithingRecipe {
 
         //be sure to remove the template when you finally get this working
 
-        public final Codec<SmithingFusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group( Ingredient.ALLOW_EMPTY_CODEC.fieldOf("template").forGetter(recipe -> recipe.template), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter(recipe -> recipe.base),
+        public final Codec<SmithingFusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(  Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter(recipe -> recipe.base),
                 Ingredient.ALLOW_EMPTY_CODEC.fieldOf("addition").forGetter(recipe -> recipe.addition),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("result").forGetter(recipe -> recipe.result)).apply(instance,SmithingFusionRecipe::new));
 
@@ -105,9 +104,8 @@ public class SmithingFusionRecipe implements SmithingRecipe {
         public SmithingFusionRecipe read(PacketByteBuf packetByteBuf) {
             Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
             Ingredient ingredient2 = Ingredient.fromPacket(packetByteBuf);
-            Ingredient ingredient3 = null;
             ItemStack itemStack = packetByteBuf.readItemStack();
-            return new SmithingFusionRecipe(ingredient, ingredient2, ingredient3, itemStack);
+            return new SmithingFusionRecipe(ingredient, ingredient2, itemStack);
         }
 
         @Override

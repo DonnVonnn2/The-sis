@@ -4,10 +4,10 @@
     "item": "minecraft:copper_ingot"
   },
   "base": {
-    "item": "minecraft:iron_helmet"
+    "item": "minecraft:iron_leggings"
   },
   "result": {
-    "item": "cooler:fused_iron_helmet"
+    "item": "cooler:fused_iron_leggings"
   },
   "template": []
 }

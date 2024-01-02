@@ -1,5 +1,6 @@
 package mersif.cooler;
 
+import mersif.cooler.recipe.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
@@ -25,5 +26,6 @@ public class SampleItem implements ModInitializer {
         // Proceed with mild caution.
         LOGGER.info("Hello Fabric world!");
         ModItems.registerItems();
+        ModRecipes.registerRecipes();
     }
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:copper_ingot"
+    "item": "minecraft:copper_block"
   },
   "base": {
     "item": "minecraft:iron_shovel"

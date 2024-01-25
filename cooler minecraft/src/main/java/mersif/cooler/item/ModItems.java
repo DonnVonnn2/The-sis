@@ -30,6 +30,16 @@ public class ModItems {
     public static final Item FUSEDIRONLEGGINGS = registerItem("fused_iron_leggings", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item FUSEDIRONBOOTS = registerItem("fused_iron_boots", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()));
 
+    //oxidised armor
+    public static final Item OXIDIZEDHELMET = registerItem("oxidized_helmet", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.HELMET, new Item.Settings()));
+
+    public static final Item OXIDIZEDCHESTPLATE = registerItem("oxidized_chestplate", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+
+    public static final Item OXIDIZEDLEGGINGS = registerItem("oxidized_leggings", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+    public static final Item OXIDIZEDBOOTS = registerItem("oxidized_boots", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.BOOTS, new Item.Settings()));
+
+
+
     private static void addToMisc(FabricItemGroupEntries entries)
     {
 
@@ -45,6 +55,11 @@ public class ModItems {
         entries.add(FUSEDIRONCHESTPLATE);
         entries.add(FUSEDIRONLEGGINGS);
         entries.add(FUSEDIRONBOOTS);
+
+        entries.add(OXIDIZEDHELMET);
+        entries.add(OXIDIZEDCHESTPLATE);
+        entries.add(OXIDIZEDLEGGINGS);
+        entries.add(OXIDIZEDBOOTS);
     }
 
     private static Item registerItem(String name, Item obj) {

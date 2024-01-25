@@ -21,14 +21,16 @@ public enum FusedMaterials implements ToolMaterial{
     private final float miningSpeed;
     private final float attackDamage;
     private final int enchantability;
+    private final Supplier<Ingredient> repairItem;
 
 
-    private FusedMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    FusedMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
+        this.repairItem = repairIngredient;
     }
 
     @Override
@@ -58,7 +60,7 @@ public enum FusedMaterials implements ToolMaterial{
 
     @Override
     public Ingredient getRepairIngredient() {
-        return null;
+        return this.repairItem.get();
     }
 
 

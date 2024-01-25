@@ -14,12 +14,14 @@ import net.minecraft.world.World;
 public class SmithingFusionRecipe implements SmithingRecipe {
     public final Ingredient base;
     public final Ingredient addition;
+    public final Ingredient template;
     public final ItemStack result;
 
-    public SmithingFusionRecipe(Ingredient base, Ingredient addition, ItemStack result) {
+    public SmithingFusionRecipe(Ingredient base, Ingredient addition, Ingredient template,ItemStack result) {
         this.base = base;
         this.addition = addition;
         this.result = result;
+        this.template = template;
     }
 
     // could delete this ngl but keep it for now. gonna remove if truly has no purpose
@@ -36,16 +38,13 @@ public class SmithingFusionRecipe implements SmithingRecipe {
 
     @Override
     public boolean matches(Inventory inventory, World world) {
-        return this.base.test(inventory.getStack(1)) && this.addition.test(inventory.getStack(2));
+        return this.template.test(inventory.getStack(0)) && this.base.test(inventory.getStack(1)) && this.addition.test(inventory.getStack(2));
     }
 
     @Override
     public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
         ItemStack itemStack = this.result.copy();
         NbtCompound nbtCompound = inventory.getStack(1).getNbt();
-        if (nbtCompound != null) {
-            itemStack.setNbt(nbtCompound.copy());
-        }
         return itemStack;
     }
 
@@ -61,7 +60,7 @@ public class SmithingFusionRecipe implements SmithingRecipe {
 
     @Override
     public boolean testTemplate(ItemStack stack) {
-        return false;
+        return this.template.test(stack);
     }
 
 
@@ -90,7 +89,7 @@ public class SmithingFusionRecipe implements SmithingRecipe {
 
         //be sure to remove the template when you finally get this working
 
-        public final Codec<SmithingFusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(  Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter(recipe -> recipe.base),
+        public final Codec<SmithingFusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(  Ingredient.ALLOW_EMPTY_CODEC.fieldOf("template").forGetter(recipe -> recipe.template),Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter(recipe -> recipe.base),
                 Ingredient.ALLOW_EMPTY_CODEC.fieldOf("addition").forGetter(recipe -> recipe.addition),
                 RecipeCodecs.CRAFTING_RESULT.fieldOf("result").forGetter(recipe -> recipe.result)).apply(instance,SmithingFusionRecipe::new));
 
@@ -104,14 +103,16 @@ public class SmithingFusionRecipe implements SmithingRecipe {
         public SmithingFusionRecipe read(PacketByteBuf packetByteBuf) {
             Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
             Ingredient ingredient2 = Ingredient.fromPacket(packetByteBuf);
+            Ingredient ingredient3 = Ingredient.fromPacket(packetByteBuf);
             ItemStack itemStack = packetByteBuf.readItemStack();
-            return new SmithingFusionRecipe(ingredient, ingredient2, itemStack);
+            return new SmithingFusionRecipe(ingredient, ingredient2, ingredient3, itemStack);
         }
 
         @Override
         public void write(PacketByteBuf packetByteBuf, SmithingFusionRecipe smithingTransformRecipe) {
             smithingTransformRecipe.base.write(packetByteBuf);
             smithingTransformRecipe.addition.write(packetByteBuf);
+            smithingTransformRecipe.template.write(packetByteBuf);
             packetByteBuf.writeItemStack(smithingTransformRecipe.result);
         }
 

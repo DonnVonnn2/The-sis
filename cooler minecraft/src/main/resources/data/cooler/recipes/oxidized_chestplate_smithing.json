@@ -1,13 +1,13 @@
 {
   "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:copper_block"
+    "item": "minecraft:oxidized_copper"
   },
   "base": {
     "item": "minecraft:iron_chestplate"
   },
   "result": {
-    "item": "cooler:fused_iron_chestplate"
+    "item": "cooler:oxidized_chestplate"
   },
   "template": []
 }

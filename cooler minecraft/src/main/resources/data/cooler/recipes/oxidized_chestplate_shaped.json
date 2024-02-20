@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:oxidized_copper"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "minecraft:iron_chestplate"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RIC",
+    "RRR"
+  ],
+  "result": {
+    "item": "cooler:oxidized_chestplate"
+  },
+  "show_notification": true
+}

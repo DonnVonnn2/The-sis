@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients":[
+    {
+      "item": "minecraft:copper_block"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+
+  ],
+  "result": {
+    "item": "minecraft:oxidized_copper"
+  },
+  "show_notification": true
+}

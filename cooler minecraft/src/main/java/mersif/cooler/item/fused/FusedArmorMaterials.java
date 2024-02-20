@@ -9,8 +9,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
 public enum FusedArmorMaterials implements ArmorMaterial {
-    COPPER("copper", 20,  new int[] {2,5 ,6, 2}, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.1f,  0f),
-    OXIDIZED("oxidized", 10, new int[] {2, 5, 6, 2}, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.1f, 0f)
+    COPPER("copper", 20,  new int[] {2,5 ,6, 2}, 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.1f,  0f),
+    OXIDIZED("oxidized", 10, new int[] {2, 5, 6, 2}, 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.1f, 0f)
     ;
 
     // it didnt work because you  FORGOT THE COMMA
@@ -23,15 +23,18 @@ public enum FusedArmorMaterials implements ArmorMaterial {
     private final float toughness;
     private final float knockbackResistance;
 
+    private final int chargeLevel;
+
     private static final int[] BASE_DURABILITY = {11, 16, 15, 13};
 
-    FusedArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, SoundEvent equipSound, float toughness, float knockbackResistance) {
+    FusedArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int chargeLevel, SoundEvent equipSound, float toughness, float knockbackResistance) {
         this.Name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
+        this.chargeLevel = chargeLevel;
     }
 
     @Override
@@ -73,4 +76,6 @@ public enum FusedArmorMaterials implements ArmorMaterial {
     public float getKnockbackResistance() {
         return this.knockbackResistance;
     }
+
+    public int getChargeLevel(){return this.chargeLevel;}
 }

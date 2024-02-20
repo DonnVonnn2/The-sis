@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "cooler:block/creeper_block_front",
+    "side": "cooler:block/creeper_block_side",
+    "top": "cooler:block/creeper_block_side"
+  }
+}

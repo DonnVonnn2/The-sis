@@ -1,5 +1,9 @@
 package mersif.cooler;
 
+import mersif.cooler.block.ModBlocks;
+import mersif.cooler.event.ArmorChargingHandler;
+import mersif.cooler.event.RedstoneChargingCallback;
+import mersif.cooler.item.ModItemGroups;
 import mersif.cooler.recipe.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,5 +27,8 @@ public class SampleItem implements ModInitializer {
         LOGGER.info("Hello Fabric world!");
         ModItems.registerItems();
         ModRecipes.registerRecipes();
+        ModItemGroups.registerItemGroups();
+        ModBlocks.registerModBLocks();
+        RedstoneChargingCallback.EVENT.register(new ArmorChargingHandler());
     }
 }

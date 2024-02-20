@@ -1,6 +1,7 @@
 package mersif.cooler.item;
 
 import mersif.cooler.SampleItem;
+import mersif.cooler.block.ModBlocks;
 import mersif.cooler.item.fused.FusedMaterials;
 import mersif.cooler.item.fused.FusedArmorMaterials;
 import net.minecraft.item.*;
@@ -38,14 +39,19 @@ public class ModItems {
     public static final Item OXIDIZEDLEGGINGS = registerItem("oxidized_leggings", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item OXIDIZEDBOOTS = registerItem("oxidized_boots", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.BOOTS, new Item.Settings()));
 
+    //oxidized weapons
 
+    public static final Item OXIDIZEDSWORD = registerItem("oxidized_sword", new SwordItem(FusedMaterials.OXIDIZED, 3, -2.4f, new Item.Settings()));
+    public static final Item OXIDIZEDAXE = registerItem("oxidized_axe", new AxeItem(FusedMaterials.OXIDIZED, 5, -2.9f, new Item.Settings()));
+    public static final Item OXIDIZEDSHOVEL =registerItem("oxidized_shovel", new ShovelItem(FusedMaterials.OXIDIZED, 1, -2.7f, new Item.Settings()));
+    public static final Item OXIDIZEDHOE = registerItem("oxidized_hoe", new HoeItem(FusedMaterials.OXIDIZED, 0, -1.4f, new Item.Settings()));
+    public static final Item OXDIZEDPICKAXE = registerItem("oxidized_pickaxe", new PickaxeItem(FusedMaterials.OXIDIZED, 2, -2.8f, new Item.Settings()));
 
     private static void addToMisc(FabricItemGroupEntries entries)
     {
 
 
         //marked unstable. IDK waht to do about that
-        entries.add(WERLDSTARR);
         entries.add(FUSEDIRONSWORD);
         entries.add(FUSEDIRONAXE);
         entries.add(FUSEDIRONHOE);
@@ -56,10 +62,17 @@ public class ModItems {
         entries.add(FUSEDIRONLEGGINGS);
         entries.add(FUSEDIRONBOOTS);
 
+        entries.add(ModBlocks.CHARGING_STATION);
+
         entries.add(OXIDIZEDHELMET);
         entries.add(OXIDIZEDCHESTPLATE);
         entries.add(OXIDIZEDLEGGINGS);
         entries.add(OXIDIZEDBOOTS);
+        entries.add(OXDIZEDPICKAXE);
+        entries.add(OXIDIZEDAXE);
+        entries.add(OXIDIZEDHOE);
+        entries.add(OXIDIZEDSHOVEL);
+        entries.add(OXIDIZEDSWORD);
     }
 
     private static Item registerItem(String name, Item obj) {
@@ -71,4 +84,6 @@ public class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(ModItems::addToMisc);
     }
+
+
 }

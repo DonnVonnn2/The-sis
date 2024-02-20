@@ -1,18 +1,17 @@
 package mersif.cooler.event;
 
-import mersif.cooler.item.fused.FusedArmorMaterials;
-import net.minecraft.block.RedstoneTorchBlock;
-import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.ServerMetadata;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.RedstoneView;
 import net.minecraft.world.World;
 
 public class ArmorChargingHandler implements RedstoneChargingCallback{
+    @Override
+    public ActionResult interact(ArmorStandEntity armorstand, RedstoneView redstone, World world) {
+        return null;
+    }
 
+/*
     @Override
     public ActionResult interact(ArmorStandEntity armorstand, RedstoneView redstone, World world) {
 
@@ -28,6 +27,7 @@ public class ArmorChargingHandler implements RedstoneChargingCallback{
 
         return ActionResult.PASS;
     }
+*/
 }
 
 

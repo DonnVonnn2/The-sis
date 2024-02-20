@@ -1,14 +1,9 @@
 package mersif.cooler.item.fused;
 
-import mersif.cooler.SampleItem;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.item.Items;
-import  net.minecraft.item.ToolMaterials;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.item.ToolMaterial;   //not working for some reason
-import net.minecraft.util.Lazy;
-
-
 
 import java.util.function.Supplier;
 

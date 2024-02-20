@@ -1,7 +1,6 @@
 package mersif.cooler.item.fused;
 
 import mersif.cooler.SampleItem;
-import net.minecraft.client.sound.Sound;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;

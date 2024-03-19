@@ -9,8 +9,8 @@ import java.util.function.Supplier;
 
 
 public enum FusedMaterials implements ToolMaterial{
-    COPPER(MiningLevels.IRON, 301, 6.5f, 2.7f, 3, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
-    OXIDIZED(MiningLevels.IRON, 301, 6.5f, 2.7f, 3, () -> Ingredient.ofItems(Items.COPPER_INGOT));
+    COPPER(MiningLevels.IRON, 301, 6.5f, 2.7f, 0, () -> Ingredient.ofItems(Items.COPPER_INGOT)),
+    OXIDIZED(MiningLevels.IRON, 301, 6.5f, 2.7f, 0, () -> Ingredient.ofItems(Items.COPPER_INGOT));
 
     private final int itemDurability;
     private final int miningLevel;

@@ -17,19 +17,19 @@ public class ModItems {
 // will register items.
     public static final Item WERLDSTARR = registerItem("werldstarr", new Item(new FabricItemSettings()));   //just a test
     //Fused weapons
-    public static final Item FUSEDIRONSWORD = registerItem("fused_iron_sword", new SwordItem(FusedMaterials.COPPER, 3, -2.4f, new Item.Settings()));
-    public static final Item FUSEDIRONSHOVEL = registerItem("fused_iron_shovel", new ShovelItem(FusedMaterials.COPPER, 1, -2.7f, new Item.Settings()));
-    public static final Item FUSEDIRONAXE = registerItem("fused_iron_axe", new AxeItem(FusedMaterials.COPPER, 5, -2.9f, new Item.Settings()));
-    public static final Item FUSEDIRONPICKAXE = registerItem("fused_iron_pickaxe", new PickaxeItem(FusedMaterials.COPPER, 2, -2.8f, new Item.Settings()));
-    public static final Item FUSEDIRONHOE = registerItem("fused_iron_hoe", new HoeItem(FusedMaterials.COPPER, 0, -1.4f, new Item.Settings()));        //she a hoe :0
+    public static final Item FUSEDIRONSWORD = registerItem("fused_sword", new SwordItem(FusedMaterials.COPPER, 3, -2.4f, new Item.Settings()));
+    public static final Item FUSEDIRONSHOVEL = registerItem("fused_shovel", new ShovelItem(FusedMaterials.COPPER, 1, -2.7f, new Item.Settings()));
+    public static final Item FUSEDIRONAXE = registerItem("fused_axe", new AxeItem(FusedMaterials.COPPER, 5, -2.9f, new Item.Settings()));
+    public static final Item FUSEDIRONPICKAXE = registerItem("fused_pickaxe", new PickaxeItem(FusedMaterials.COPPER, 2, -2.8f, new Item.Settings()));
+    public static final Item FUSEDIRONHOE = registerItem("fused_hoe", new HoeItem(FusedMaterials.COPPER, 0, -1.4f, new Item.Settings()));        //she a hoe :0
 
     //fused armor
 
-    public static final Item FUSEDIRONHELMET = registerItem("fused_iron_helmet", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()));
-    public static final Item FUSEDIRONCHESTPLATE = registerItem("fused_iron_chestplate", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+    public static final Item FUSEDIRONHELMET = registerItem("fused_helmet", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()));
+    public static final Item FUSEDIRONCHESTPLATE = registerItem("fused_chestplate", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
 
-    public static final Item FUSEDIRONLEGGINGS = registerItem("fused_iron_leggings", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
-    public static final Item FUSEDIRONBOOTS = registerItem("fused_iron_boots", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()));
+    public static final Item FUSEDIRONLEGGINGS = registerItem("fused_leggings", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
+    public static final Item FUSEDIRONBOOTS = registerItem("fused_boots", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()));
 
     //oxidised armor
     public static final Item OXIDIZEDHELMET = registerItem("oxidized_helmet", new ArmorItem(FusedArmorMaterials.OXIDIZED, ArmorItem.Type.HELMET, new Item.Settings()));

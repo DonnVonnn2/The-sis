@@ -29,7 +29,6 @@ public class CreeperBlockEntity extends BlockEntity {
     }
 
 
-/*
     @Override
     protected void writeNbt(NbtCompound nbt) {
 
@@ -41,5 +40,9 @@ public class CreeperBlockEntity extends BlockEntity {
         super.writeNbt(nbt);
 
     }
-*/
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+    }
 }

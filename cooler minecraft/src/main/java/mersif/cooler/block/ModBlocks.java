@@ -28,6 +28,7 @@ public class ModBlocks {
 
     //block entities
     public static final BlockEntityType<CreeperBlockEntity> CREEPER_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(SampleItem.MOD_ID, "creeper_block"), FabricBlockEntityTypeBuilder.create(CreeperBlockEntity::new, Creeper_Block).build());
+    public static final BlockEntityType<ChargingStationEntity> CHARGING_STATION_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(SampleItem.MOD_ID, "charging_station"), FabricBlockEntityTypeBuilder.create(ChargingStationEntity::new, CHARGING_STATION).build());
 
 
     private static Block registerBlock(String name, Block block){

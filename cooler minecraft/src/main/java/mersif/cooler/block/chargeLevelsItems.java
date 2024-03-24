@@ -1,5 +1,6 @@
 package mersif.cooler.block;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -11,10 +12,13 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.attribute.AttributeModifierCreator;
 import net.minecraft.item.*;
 import mersif.cooler.item.fused.FusedMaterials;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 import static mersif.cooler.item.fused.FusedArmorMaterials.COPPER;
 
@@ -106,15 +110,22 @@ public class chargeLevelsItems {
 
     private void swiftnessBuff(ItemStack item){
         //if a tool then swiftness
-        //Update: cant get haste, have to increaase speed the old fashioned way
+        //Update: cant get haste, have to increase speed the old fashioned way
         item.addEnchantment(Enchantments.EFFICIENCY, 2);
     }
 
     private void armorBuff(ItemStack item){
         // if armor then increase walking speed and defense.
         //I have no fucking clue if this will work
-        EntityAttributeModifier attributeModifier = new EntityAttributeModifier("generic.movement_speed", 0.1, EntityAttributeModifier.Operation.ADDITION);
+           // this is the answer to all of your probelm. Update: it didnt do shit, help
+
+
+        EntityAttributeModifier attributeModifier = (EntityAttributeModifier) item.getAttributeModifiers(EquipmentSlot.MAINHAND);     // goes through a bunch of other stuff, ignores all below this one for some reason
+        ChargedAttributeModifier mod = new ChargedAttributeModifier(attributeModifier.getId(), attributeModifier.getValue(), attributeModifier.getName(), EntityAttributeModifier.Operation.ADDITION);
+        attributeModifier = mod.createAttributeModifier(3);
         item.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, attributeModifier, EquipmentSlot.FEET);
+
+        //item.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, attribute, EquipmentSlot.FEET);
 
     }
 
@@ -123,8 +134,36 @@ public class chargeLevelsItems {
     }
     private void chestplateBuff(ItemStack item){
         // armor
-        EntityAttributeModifier attributeModifier = new EntityAttributeModifier("generic.armor", 8, EntityAttributeModifier.Operation.ADDITION);
+        EntityAttributeModifier oldAttributes = (EntityAttributeModifier) item.getAttributeModifiers(EquipmentSlot.MAINHAND);
+        EntityAttributeModifier attributeModifier = new EntityAttributeModifier("generic.armor", 3 + oldAttributes.getValue(), EntityAttributeModifier.Operation.ADDITION);
         item.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, attributeModifier, EquipmentSlot.CHEST);
     }
 
+    class ChargedAttributeModifier implements AttributeModifierCreator {
+
+        private final UUID uuid;
+        private final double basevalue;
+        private final EntityAttributeModifier.Operation operation;
+        private final String attribute;
+
+        ChargedAttributeModifier(UUID uuid, double val, String att, EntityAttributeModifier.Operation opp ){
+            this.uuid = uuid;
+            this.basevalue = val;
+            this.operation = opp;
+            this.attribute = att;
+
+        }
+
+        @Override
+        public UUID getUuid() {
+            return this.uuid;
+        }
+
+        @Override
+        public EntityAttributeModifier createAttributeModifier(int amplifier) {
+            return new EntityAttributeModifier(this.uuid, attribute, basevalue * (double) (amplifier + 1), this.operation);
+        }
+    }
+
 }
+

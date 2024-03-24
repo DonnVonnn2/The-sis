@@ -7,7 +7,7 @@
     "item": "minecraft:iron_shovel"
   },
   "result": {
-    "item": "cooler:fused_iron_shovel"
+    "item": "cooler:fused_shovel"
   },
   "template": []
 }

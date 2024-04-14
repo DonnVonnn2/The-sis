@@ -8,6 +8,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.InstantStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,6 +18,7 @@ import net.minecraft.item.*;
 import mersif.cooler.item.fused.FusedMaterials;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
+
 
 import java.util.UUID;
 
@@ -33,11 +35,13 @@ public class chargeLevelsItems {
             return;
         }
 
+
+
         NbtCompound nbt = itemStack.getNbt();
         Item item = itemStack.getItem();
         String name = item.toString();
         boolean nameCheck = materalCheck(name);
-        String itemType = name.substring(name.indexOf("_") +1, name.length());
+        String itemType = name.substring(name.indexOf("_") + 1, name.length());
 
         if(nameCheck)
         {
@@ -134,8 +138,15 @@ public class chargeLevelsItems {
     }
     private void chestplateBuff(ItemStack item){
         // armor
-        EntityAttributeModifier oldAttributes = (EntityAttributeModifier) item.getAttributeModifiers(EquipmentSlot.MAINHAND);
-        EntityAttributeModifier attributeModifier = new EntityAttributeModifier("generic.armor", 3 + oldAttributes.getValue(), EntityAttributeModifier.Operation.ADDITION);
+        EntityAttributeModifier oldAttributes;   // this funny little statement causes a WHOLE ASS DETOUR BECASUE OF AN ERROR I GUESSS IDK
+        //Multimap<EntityAttribute, EntityAttributeModifier> oldAttributes = item.getAttributeModifiers(EquipmentSlot.CHEST);
+
+        StatusEffect j = new InstantStatusEffect(StatusEffectCategory.BENEFICIAL, 0);
+        j.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", 0.3, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+
+        //t
+
+        EntityAttributeModifier attributeModifier = new EntityAttributeModifier("generic.armor", 3 , EntityAttributeModifier.Operation.ADDITION);
         item.addAttributeModifier(EntityAttributes.GENERIC_ARMOR, attributeModifier, EquipmentSlot.CHEST);
     }
 

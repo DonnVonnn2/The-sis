@@ -11,4 +11,6 @@ public class ChargingStationEntity extends BlockEntity {
     public  ChargingStationEntity(BlockPos pos, BlockState state){super(CHARGING_STATION_ENTITY, pos, state);}
 
 
+
+
 }

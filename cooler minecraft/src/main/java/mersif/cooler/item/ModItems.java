@@ -25,8 +25,8 @@ public class ModItems {
 
     //fused armor
 
-    public static final Item FUSEDIRONHELMET = registerItem("fused_helmet", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()));
-    public static final Item FUSEDIRONCHESTPLATE = registerItem("fused_chestplate", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
+    public static final Item FUSEDIRONHELMET = registerItem("fused_helmet", new ChargableArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.HELMET, new Item.Settings()));
+    public static final Item FUSEDIRONCHESTPLATE = registerItem("fused_chestplate", new ChargableArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.CHESTPLATE, new Item.Settings()));
 
     public static final Item FUSEDIRONLEGGINGS = registerItem("fused_leggings", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.LEGGINGS, new Item.Settings()));
     public static final Item FUSEDIRONBOOTS = registerItem("fused_boots", new ArmorItem(FusedArmorMaterials.COPPER, ArmorItem.Type.BOOTS, new Item.Settings()));

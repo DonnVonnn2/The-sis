@@ -14,8 +14,10 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import mersif.cooler.block.chargeLevelsItems;
 
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +40,7 @@ public class ChargableArmorItem extends ArmorItem {
     private static final Map<EquipmentSlot, StatusEffectInstance> CHESTPLATE_CHARGED_BUFF =
             (new ImmutableMap.Builder<EquipmentSlot, StatusEffectInstance>()).put
                     (EquipmentSlot.CHEST, new StatusEffectInstance(StatusEffects.HASTE,
-                            -1, 1, false, false, false )).build();
+                            -1, 1, false, false, true )).build();
 
     // -1 duration is infinite :3. Let it be KNOWN
 
@@ -88,21 +90,33 @@ public class ChargableArmorItem extends ArmorItem {
 
         if(!world.isClient)
         {
-            if(entity instanceof PlayerEntity player && (headCheck(player) || chestCheck(player) || legsCheck(player) || bootsCheck(player))){
-                evaluateArmorEffects(player);
+            //entity instanceof PlayerEntity player
+            PlayerEntity playerEntity = (PlayerEntity) entity;
+            if(playerEntity.isPlayer() && (headCheck(playerEntity) || chestCheck(playerEntity) || legsCheck(playerEntity) || bootsCheck(playerEntity))){
+                evaluateArmorEffects(playerEntity, stack);
+                // dont get rid of the bools. it'll ruin everything
+                // change this if to see if the bools are false and then if it is false have it remove the status effect :3
+            }
+            else if (playerEntity.isPlayer()){
+                armorEffectScrubber(playerEntity, stack);
+
+                //notes
+
+                //managed to fix infinitely getting status effects, now im putting in removal process
+                //in a perpetual state of being added. make a thing that doesn't refresh the effects.
             }
         }
 
         super.inventoryTick(stack, world, entity, slot, selected);
     }
 
-    private void evaluateArmorEffects(PlayerEntity player) {
+    private void evaluateArmorEffects(PlayerEntity player, ItemStack stack) {
 
-        ArmorMaterial armorMaterial;    // READ THIS!!! have map work based on equipment slot instead of armor material
+        NbtCompound compound = stack.getNbt();
+
+        if(!compound.contains("charged") || !compound.getBoolean("charged")){return;}//if not charged it returns
+
         StatusEffectInstance statusEffect;
-         //Set<Map.Entry<ArmorMaterial, StatusEffectInstance>> entry =  CHESTPLATE_CHARGED_BUFF.entrySet();
-         // cannot cast map entry onto set :)
-            // the boolean check is redundant since its a public variable
         if(chestplate){
             statusEffect = CHESTPLATE_CHARGED_BUFF.get(EquipmentSlot.CHEST);        // this is for now, tweak it later
 
@@ -112,13 +126,23 @@ public class ChargableArmorItem extends ArmorItem {
             player.sendMessage(Text.literal("Not implemented yet, use chestplate"));
         }
 
-/*
-        for (Map.Entry<ArmorMaterial, StatusEffectInstance> entry : CHESTPLATE_CHARGED_BUFF.entrySet()) {
-
-            this works for some reason. I D K W H Y
-        }
-*/
     }
+    private void armorEffectScrubber(PlayerEntity player, ItemStack stack){
+
+        NbtCompound nbt = stack.getNbt();  //probably dont need nbt for this since it acivates from a lack of armor
+        StatusEffectInstance statusEffect;
+
+        if(!chestplate){
+            statusEffect = CHESTPLATE_CHARGED_BUFF.get(EquipmentSlot.CHEST);
+            player.removeStatusEffect(statusEffect.getEffectType());
+        }
+    }
+
+/*
+    public void removeStatusEffects(PlayerEntity player){
+        player.removeStatusEffect();
+    }
+*/
 
     private void addStatusEffect(PlayerEntity player, StatusEffectInstance effectInstance){
         charged = player.hasStatusEffect(effectInstance.getEffectType());
@@ -128,6 +152,7 @@ public class ChargableArmorItem extends ArmorItem {
         }
         else{
             player.removeStatusEffect(effectInstance.getEffectType());
+            charged = false;
         }
 
     }

@@ -77,11 +77,16 @@ public class ChargingStation extends Block {
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
 
+        if(world.isClient())
+        {return;}
 
         if(world.isReceivingRedstonePower(pos))
         {
-            world.setBlockState(pos, state.cycle(POWERED));
+            world.setBlockState(pos, state.with(POWERED, true));
         }
-        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+        else{
+            world.setBlockState(pos, state.with(POWERED, false));
+        }
+//super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
     }
 }

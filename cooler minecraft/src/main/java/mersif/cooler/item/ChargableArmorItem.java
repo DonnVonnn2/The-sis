@@ -3,6 +3,7 @@ package mersif.cooler.item;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,10 +35,10 @@ public class ChargableArmorItem extends ArmorItem {
     private static final Map<EquipmentSlot, StatusEffectInstance> CHARGE_LEVEL_ONE =
             (new ImmutableMap.Builder<EquipmentSlot, StatusEffectInstance>()).put
                     (EquipmentSlot.CHEST, new StatusEffectInstance(StatusEffects.HASTE,
-                            -1, 1, false, false, true ))
-                    .put(EquipmentSlot.HEAD, new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 1, false, false, true))
-                    .put(EquipmentSlot.LEGS, new StatusEffectInstance(StatusEffects.SPEED, -1, 1, false, false, true)).
-                    put(EquipmentSlot.FEET, new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 1, false, false, true)).build();
+                            -1, 0, false, false, true ))
+                    .put(EquipmentSlot.HEAD, new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 0, false, false, true))
+                    .put(EquipmentSlot.LEGS, new StatusEffectInstance(StatusEffects.SPEED, -1, 0, false, false, true)).
+                    put(EquipmentSlot.FEET, new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 0, false, false, true)).build();
 
 
     // -1 duration is infinite :3. Let it be KNOWN
@@ -51,6 +52,9 @@ public class ChargableArmorItem extends ArmorItem {
         leggings = false;
         helmet = false;
         charged = false;
+        //absolutely bizzare glitch where if you have armor that isn't charged on
+        //everything below it will no longer work.
+        //i have no idea what causes this but i do not believe it is my code.
 
     }
 
@@ -106,7 +110,7 @@ public class ChargableArmorItem extends ArmorItem {
             }
         }
 
-        super.inventoryTick(stack, world, entity, slot, selected);
+        // super.inventoryTick(stack, world, entity, slot, selected);
     }
 
     private boolean chargeCheck(@NotNull ItemStack item)
@@ -187,9 +191,20 @@ public class ChargableArmorItem extends ArmorItem {
 
    private void addStatusEffect(PlayerEntity player, StatusEffectInstance effectInstance){
         charged = player.hasStatusEffect(effectInstance.getEffectType());
+        StatusEffectInstance instanceCopy = player.getStatusEffect(effectInstance.getEffectType());
 
-        if(!charged){
+        if(instanceCopy == null /*&& !instanceCopy.equals(effectInstance)*/){
             player.addStatusEffect( new StatusEffectInstance(effectInstance));
+
+        }
+
+    }
+
+    private void removeStatusEffect(PlayerEntity player, StatusEffectInstance effectInstance){
+        StatusEffectInstance instanceCopy = player.getStatusEffect(effectInstance.getEffectType());
+
+        if(instanceCopy != null /*&& !instanceCopy.equals(effectInstance)*/){
+            player.removeStatusEffect(effectInstance.getEffectType());
 
         }
 

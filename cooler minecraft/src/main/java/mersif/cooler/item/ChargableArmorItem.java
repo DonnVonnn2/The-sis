@@ -3,7 +3,6 @@ package mersif.cooler.item;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +10,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,11 +32,11 @@ public class ChargableArmorItem extends ArmorItem {
 
     private static final Map<EquipmentSlot, StatusEffectInstance> CHARGE_LEVEL_ONE =
             (new ImmutableMap.Builder<EquipmentSlot, StatusEffectInstance>()).put
-                    (EquipmentSlot.CHEST, new StatusEffectInstance(StatusEffects.HASTE,
+                    (EquipmentSlot.CHEST, new StatusEffectInstance(StatusEffects.RESISTANCE,
                             -1, 0, false, false, true ))
-                    .put(EquipmentSlot.HEAD, new StatusEffectInstance(StatusEffects.RESISTANCE, -1, 0, false, false, true))
-                    .put(EquipmentSlot.LEGS, new StatusEffectInstance(StatusEffects.SPEED, -1, 0, false, false, true)).
-                    put(EquipmentSlot.FEET, new StatusEffectInstance(StatusEffects.SLOW_FALLING, -1, 0, false, false, true)).build();
+                    .put(EquipmentSlot.HEAD, new StatusEffectInstance(StatusEffects.NIGHT_VISION, -1, 0, false, false, true))
+                    .put(EquipmentSlot.LEGS, new StatusEffectInstance(StatusEffects.JUMP_BOOST, -1, 0, false, false, true)).
+                    put(EquipmentSlot.FEET, new StatusEffectInstance(StatusEffects.SPEED, -1, 0, false, false, true)).build();
 
 
     // -1 duration is infinite :3. Let it be KNOWN
@@ -101,7 +99,7 @@ public class ChargableArmorItem extends ArmorItem {
                 // change this if to see if the bools are false and then if it is false have it remove the status effect :3
             }
             if (playerEntity.isPlayer()){
-                armorEffectScrubber(playerEntity, stack);
+                armorEffectScrubber(playerEntity);
 
                 //notes
 
@@ -139,7 +137,6 @@ public class ChargableArmorItem extends ArmorItem {
 
     private void evaluateArmorEffects(PlayerEntity player, ItemStack stack) {
 
-        NbtCompound compound = stack.getNbt();
 
 //        if(!compound.contains("charged") || !compound.getBoolean("charged")){return;}
 //        //it goes over every instance of chargable armor item in inventory
@@ -163,7 +160,7 @@ public class ChargableArmorItem extends ArmorItem {
         }
 
     }
-    private void armorEffectScrubber(PlayerEntity player, ItemStack stack){
+    private void armorEffectScrubber(PlayerEntity player){
 
         StatusEffectInstance statusEffect;
 
@@ -200,14 +197,18 @@ public class ChargableArmorItem extends ArmorItem {
 
     }
 
+/*
     private void removeStatusEffect(PlayerEntity player, StatusEffectInstance effectInstance){
         StatusEffectInstance instanceCopy = player.getStatusEffect(effectInstance.getEffectType());
 
-        if(instanceCopy != null /*&& !instanceCopy.equals(effectInstance)*/){
+        if(instanceCopy != null */
+/*&& !instanceCopy.equals(effectInstance)*//*
+){
             player.removeStatusEffect(effectInstance.getEffectType());
 
         }
 
     }
+*/
 
 }

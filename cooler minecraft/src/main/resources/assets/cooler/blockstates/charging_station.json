@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": {"model": "cooler:block/charging_station"},
+    "powered=true": {"model": "cooler:block/charging_station_powered"}
+  }
+}

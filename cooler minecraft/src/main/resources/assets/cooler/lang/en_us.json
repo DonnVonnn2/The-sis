@@ -9,6 +9,16 @@
     "item.cooler.fused_chestplate": "Fused Chestplate",
     "item.cooler.fused_boots": "Fused Boots",
     "item.cooler.oxidized_helmet": "Oxidized Helmet",
+    "item.cooler.oxidized_chestplate": "Oxidized Chestplate",
+    "item.cooler.oxidized_leggings": "Oxidized Leggings",
+    "item.cooler.oxidized_boots": "Oxidized Boots",
+    "item.cooler.oxidized_sword": "Oxidized Sword",
+    "item.cooler.oxidized_axe": "Oxidized Axe",
+    "item.cooler.oxidized_shovel": "Oxidized Axe",
+    "item.cooler.oxidized_hoe": "Oxidized Hoe",
+    "item.cooler.oxidized_pickaxe": "Oxidized Pickaxe",
+
+    "block.cooler.charging_station": "Charging Station",
 
     "itemgroup.gittsandshiggles": "Gitts and Shiggles",
 

@@ -2,21 +2,20 @@ package mersif.cooler.block.custom;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import mersif.cooler.block.chargeLevelsItems;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
+
 
 public class ChargingStation extends Block {
     private static final BooleanProperty POWERED = BooleanProperty.of("powered");
@@ -35,6 +34,7 @@ public class ChargingStation extends Block {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+
         builder.add(POWERED);
     }
 
@@ -57,13 +57,8 @@ public class ChargingStation extends Block {
             boolean st = state.get(POWERED);
             if(st && !stack.isEmpty())
             {
-                player.sendMessage(Text.literal("0u0"));
-                chargeLevelsItems chargeLevelsItems = new chargeLevelsItems(stack);
+                new chargeLevelsItems(stack);
 
-
-            }
-            else {
-                player.sendMessage(Text.literal("Itemless behavoir"));
             }
             loopCheck = true;
 
@@ -75,18 +70,30 @@ public class ChargingStation extends Block {
     }
 
     @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if(!world.isClient()){
+            world.setBlockState(pos, state.with(POWERED,false));
+        }
+    }
+
+
+
+    @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
 
-        if(world.isClient())
-        {return;}
-
-        if(world.isReceivingRedstonePower(pos))
+        if(!world.isClient())
         {
-            world.setBlockState(pos, state.with(POWERED, true));
+            if(world.isReceivingRedstonePower(pos))
+            {
+                world.setBlockState(pos, state.with(POWERED, true));
+            }
+            else{
+                world.setBlockState(pos, state.with(POWERED, false));
+            }
+
+
         }
-        else{
-            world.setBlockState(pos, state.with(POWERED, false));
-        }
+
 //super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
     }
 }

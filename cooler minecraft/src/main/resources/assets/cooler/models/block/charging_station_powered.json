@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "cooler:block/charging_station_front_powered",
+    "side": "cooler:block/charging_station_side",
+    "top": "cooler:block/charging_station_top"
+  }
+}

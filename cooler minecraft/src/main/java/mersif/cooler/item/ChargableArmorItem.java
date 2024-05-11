@@ -114,12 +114,12 @@ public class ChargableArmorItem extends ArmorItem {
     private boolean chargeCheck(@NotNull ItemStack item)
     {
         boolean check = false;
-        if(!item.hasNbt())
+        if(item.hasNbt())
         {
-            return check;
+            NbtCompound nbt = item.getNbt();
+            check = nbt.getBoolean("charged");
+
         }
-        NbtCompound nbt = item.getNbt();
-        check = nbt.getBoolean("charged");
 
         return check;
 
